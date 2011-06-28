@@ -1,3 +1,4 @@
+package httpserver.packet.initialline;
 
 public class InitialLine {
 	protected String text;

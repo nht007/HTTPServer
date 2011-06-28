@@ -1,3 +1,4 @@
+package httpserver.packet;
 import static org.junit.Assert.*;
 
 import org.junit.*;
@@ -15,15 +16,7 @@ public class PacketHeaderTest {
 	}
 	
 	@Test
-	public void containsText() {
-		assertEquals(
-				"GET / HTTP/1.0\r\n" +
-				"User-Agent: HTTPTool/1.0",
-				packetHeader.getText());
-	}
-	
-	@Test
-	public void splitHeaderLines() {
+	public void parsesHeaderLines() {
 		String[] lines = packetHeader.getLines();
 		
 		assertEquals("GET / HTTP/1.0", lines[0]);
@@ -31,7 +24,7 @@ public class PacketHeaderTest {
 	}
 	
 	@Test
-	public void containsInitialRequestLine() {
+	public void parsesInitialRequestLine() {
 		assertEquals("GET / HTTP/1.0", packetHeader.getInitialLine().getText());
 	}
 }

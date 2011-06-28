@@ -1,3 +1,6 @@
+package httpserver.packet;
+import httpserver.packet.initialline.InitialLine;
+
 
 public class PacketHeader {
 	private String text;

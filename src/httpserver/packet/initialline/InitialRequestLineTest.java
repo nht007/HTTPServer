@@ -1,3 +1,4 @@
+package httpserver.packet.initialline;
 import static org.junit.Assert.*;
 
 import org.junit.*;
@@ -10,17 +11,17 @@ public class InitialRequestLineTest {
 	}
 	
 	@Test
-	public void containsMethod() {
+	public void parsessMethod() {
 		assertEquals("GET", initialRequestLine.getMethod());
 	}
 	
 	@Test
-	public void containsPath() {
+	public void parsesPath() {
 		assertEquals("/", initialRequestLine.getPath());
 	}
 	
 	@Test
-	public void containsHTTPVersion() {
+	public void parsesHTTPVersion() {
 		assertEquals("HTTP/1.0", initialRequestLine.getVersion());
 	}
 }

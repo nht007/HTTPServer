@@ -1,3 +1,4 @@
+package httpserver.packet.initialline;
 
 public class InitialRequestLine extends InitialLine {
 	private String method;

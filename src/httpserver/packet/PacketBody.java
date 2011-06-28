@@ -1,3 +1,4 @@
+package httpserver.packet;
 
 public class PacketBody {
 	private String text;

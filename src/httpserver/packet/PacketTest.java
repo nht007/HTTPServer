@@ -1,3 +1,4 @@
+package httpserver.packet;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -7,7 +8,7 @@ import org.junit.Test;
 public class PacketTest {
 	
 	@Test
-	public void splitRequest() {
+	public void parsesRequest() {
 		String request = 
 				"GET / HTTP/1.0\r\n" +
 				"User-Agent: HTTPTool/1.0\n\r\n" +
