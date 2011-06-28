@@ -10,16 +10,13 @@ public class InitialResponseLineTest {
 	
 	@BeforeClass
 	public static void constructInitialResponseLine() {
-		initialResponseLine = new InitialResponseLine();
+		initialResponseLine = new InitialResponseLine("HTTP/1.0", 200, "OK");
 	}
 	
 	@Test
-	public void printsResponseLine() {
-		initialResponseLine.setVersion("HTTP/1.0");
-		initialResponseLine.setStatusCode(200);
-		initialResponseLine.setReasonPhrase("OK");
-		String output = initialResponseLine.print();
+	public void buildsText() {
+		String text = initialResponseLine.getText();
 		
-		assertEquals(output, "HTTP/1.0 200 OK");
+		assertEquals(text, "HTTP/1.0 200 OK");
 	}
 }

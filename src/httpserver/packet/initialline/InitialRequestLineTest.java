@@ -11,7 +11,7 @@ public class InitialRequestLineTest {
 	}
 	
 	@Test
-	public void parsessMethod() {
+	public void parsesMethod() {
 		assertEquals("GET", initialRequestLine.getMethod());
 	}
 	
@@ -23,5 +23,17 @@ public class InitialRequestLineTest {
 	@Test
 	public void parsesHTTPVersion() {
 		assertEquals("HTTP/1.0", initialRequestLine.getVersion());
+	}
+
+	@Test
+	public void validatesValidLine() {
+		InitialRequestLine validLine = new InitialRequestLine("GET / HTTP/1.0");
+		assertTrue(validLine.isValid());
+	}
+	
+	@Test
+	public void validatesInvalidLine() {
+		InitialRequestLine invalidLine = new InitialRequestLine("GET/HTTP/1.0");
+		assertFalse(invalidLine.isValid());
 	}
 }

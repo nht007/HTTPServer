@@ -1,8 +1,28 @@
 package httpserver.protocol;
 
+import httpserver.packet.Packet;
+import httpserver.packet.initialline.InitialResponseLine;
+
+
 public class Protocol {
-    public String processInput(String inputString) {
+	private String version = "HTTP/1.0";
+	private int statusCode;
+	private String reasonPhrase;
+	
+    public String processInput(String request) {
+    	Packet packet = new Packet(request);
     	
-    	return "HTTP/1.0 200 OK";
+    	if (packet.isValid()) {
+    		statusCode = 200;
+    		reasonPhrase = "OK";
+    	}
+    	else {
+    		statusCode = 400;
+    		reasonPhrase = "Bad Request";
+    	}
+    	
+    	InitialResponseLine response = new InitialResponseLine(version, statusCode, reasonPhrase);
+    	
+    	return response.getText();
     }
 }

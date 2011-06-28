@@ -1,24 +1,14 @@
 package httpserver.packet.initialline;
 
-public class InitialResponseLine {
+public class InitialResponseLine extends InitialLine {
 	private String version;
 	private int statusCode;
 	private String reasonPhrase;
 	
-	public void setVersion(String newVersion) {
+	public InitialResponseLine(String newVersion, int newCode, String newReasonPhrase) {
+		super(newVersion + " " + newCode + " " + newReasonPhrase);
 		version = newVersion;
-	}
-	
-	public void setStatusCode(int newCode) {
 		statusCode = newCode;
-	}
-	
-	public void setReasonPhrase(String newReasonPhrase) {
 		reasonPhrase = newReasonPhrase;
 	}
-	
-	public String print() {
-		return version + " " + statusCode + " " + reasonPhrase;
-	}
-	
 }
