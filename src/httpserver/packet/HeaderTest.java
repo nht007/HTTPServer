@@ -5,12 +5,12 @@ import org.junit.*;
 
 
 
-public class PacketHeaderTest {
-	static PacketHeader packetHeader;
+public class HeaderTest {
+	static Header packetHeader;
 	
 	@BeforeClass
 	public static void constructPacketHeader() {
-		packetHeader = new PacketHeader(
+		packetHeader = new Header(
 				"GET / HTTP/1.0\r\n" +
 				"User-Agent: HTTPTool/1.0");
 	}

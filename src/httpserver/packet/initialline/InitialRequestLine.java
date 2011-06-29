@@ -4,7 +4,7 @@ public class InitialRequestLine extends InitialLine {
 	private String method;
 	private String path;
 	private String version;
-	private boolean valid = false;
+	
 	
 	public InitialRequestLine(String origText) {
 		super(origText);
@@ -36,9 +36,5 @@ public class InitialRequestLine extends InitialLine {
 
 	public String getVersion() {
 		return version;
-	}
-	
-	public boolean isValid() {
-		return valid;
 	}
 }

@@ -10,5 +10,19 @@ public class InitialResponseLine extends InitialLine {
 		version = newVersion;
 		statusCode = newCode;
 		reasonPhrase = newReasonPhrase;
+		
+		valid = true;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+	
+	public int getCode() {
+		return statusCode;
+	}
+	
+	public String getReasonPhrase() {
+		return reasonPhrase;
 	}
 }
