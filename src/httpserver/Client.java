@@ -28,18 +28,18 @@ public class Client {
 		String request;
 		String response;
 
-		if ((request = stdIn.readLine()) != null) {
-			System.out.println("Client: " + request);
-			out.println(request);
-		}
+		request = "GET / HTTP/1.0\n\r\n";
+		System.out.println("Client: " + request);
+		out.println(request);
 		
 		if ((response = in.readLine()) != null) {
 			System.out.println("Server: " + response);			
 		}
-
+		
 		out.close();
 		in.close();
 		stdIn.close();
 		socket.close();
+		System.err.println("Connection Closed");
 	}
 }

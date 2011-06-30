@@ -1,5 +1,7 @@
 package httpserver.protocol;
 
+import java.io.BufferedReader;
+
 import httpserver.packet.Packet;
 import httpserver.packet.initialline.StatusLine;
 
@@ -9,8 +11,8 @@ public class Protocol {
 	private int statusCode;
 	private String reasonPhrase;
 	
-    public String processInput(String request) {
-    	Packet packet = new Packet(request);
+    public String processInput(BufferedReader input) {
+    	Packet packet = new Packet(input);
     	
     	if (packet.isValid()) {
     		statusCode = 200;
