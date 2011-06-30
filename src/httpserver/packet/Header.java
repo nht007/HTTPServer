@@ -1,6 +1,6 @@
 package httpserver.packet;
 import httpserver.packet.initialline.InitialLine;
-import httpserver.packet.initialline.InitialRequestLine;
+import httpserver.packet.initialline.RequestLine;
 
 
 public class Header {
@@ -12,7 +12,7 @@ public class Header {
 	public Header(String origText) {
 		text = origText;
 		lines = text.split("[\r|\n]+");
-		initialLine = new InitialRequestLine(lines[0]); // TODO: extract to subclasses RequestHeader and ResponseHeader
+		initialLine = new RequestLine(lines[0]); // TODO: extract to subclasses RequestHeader and ResponseHeader
 		
 		valid = initialLine.isValid();
 	}

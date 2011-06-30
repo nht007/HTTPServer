@@ -1,12 +1,12 @@
 package httpserver.packet.initialline;
 
-public class InitialRequestLine extends InitialLine {
+public class RequestLine extends InitialLine {
 	private String method;
 	private String path;
 	private String version;
 	
 	
-	public InitialRequestLine(String origText) {
+	public RequestLine(String origText) {
 		super(origText);
 		String[] splitText = text.split("\\s+", 3);
 		

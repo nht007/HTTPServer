@@ -1,7 +1,7 @@
 package httpserver.protocol;
 
 import httpserver.packet.Packet;
-import httpserver.packet.initialline.InitialResponseLine;
+import httpserver.packet.initialline.StatusLine;
 
 
 public class Protocol {
@@ -21,7 +21,7 @@ public class Protocol {
     		reasonPhrase = "Bad Request";
     	}
     	
-    	InitialResponseLine response = new InitialResponseLine(version, statusCode, reasonPhrase);
+    	StatusLine response = new StatusLine(version, statusCode, reasonPhrase);
     	
     	return response.getText();
     }
