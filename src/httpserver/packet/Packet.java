@@ -10,14 +10,20 @@ public class Packet {
 
 	public Packet(BufferedReader input) {
 		header = parseHeader(input);
-//		body = parseBody(input);
-		body = new Body("");
 		
-		if (header == null || body == null) {
+		if (header == null) {
 			header = null;
 			body = null;
 			valid = false;
+			return;
 		}
+		
+		int contentLength = header.getContentLength();
+		
+		if (contentLength > 0) {
+			body = parseBody(input, contentLength);
+		}
+
 	}
 
 	private Header parseHeader(BufferedReader input) {
@@ -38,17 +44,12 @@ public class Packet {
 
 	}
 	
-	private Body parseBody(BufferedReader input) {
-		String bodyString = "";
+	private Body parseBody(BufferedReader input, int contentLength) {
+		char[] bodyString = new char[contentLength];
+		
 		try {
-			String readLine;
-			while ((readLine = input.readLine()) != null) {
-				bodyString += readLine + "\n";
-				
-				if (readLine != null && readLine.equals("")) {
-					return new Body(bodyString);
-				}
-			}
+			input.read(bodyString, 0, contentLength);
+			return new Body(new String(bodyString));
 		} catch (IOException e) {
 			
 		}
@@ -65,10 +66,10 @@ public class Packet {
 	}
 	
 	public boolean isValid() {
-		if (header == null || body == null) {
+		if (header == null) {
 			return false;
 		}
-		else if (!header.isValid() || !body.isValid()) {
+		else if (!header.isValid()) {
 			return false;
 		}
 		return valid;

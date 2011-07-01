@@ -17,6 +17,17 @@ public class Header {
 		valid = initialLine.isValid();
 	}
 	
+	public int getContentLength() {
+		String[][] splitLines = new String[lines.length][];
+		for (int i = 0; i < lines.length; i++) {
+			splitLines[i] = lines[i].split(":", 2);
+		}
+		for (String[] line : splitLines) {
+			if (line[0].equals("Content-Length"))
+				return Integer.parseInt(line[1].trim());
+		}
+		return -1;
+	}
 	public String getText() {
 		return text;
 	}

@@ -33,8 +33,7 @@ public class ProtocolTest {
 	public void handlesGetRequest() {
 		String request = 
 			"GET / HTTP/1.0\r\n" +
-			"User-Agent: HTTPTool/1.0\n\r\n" +
-			"<html>Hello World!\r\n</html>";
+			"User-Agent: HTTPTool/1.0\n\r\n";
 
 		BufferedReader input = new BufferedReader(
 				new InputStreamReader(
@@ -47,9 +46,10 @@ public class ProtocolTest {
 	@Test
 	public void handlesMissingBlankLine() {
 		String request = 
-			"GET / HTTP/1.0\r\n" +
+			"POST / HTTP/1.0\n" +
 			"User-Agent: HTTPTool/1.0\n" +
-			"<html>Hello World!\r\n</html>";
+			"Content-Length: 26\n" +
+			"<html>Hello World!\n</html>";
 		
 		BufferedReader input = new BufferedReader(
 				new InputStreamReader(
@@ -62,9 +62,10 @@ public class ProtocolTest {
 	@Test
 	public void handlesMalformedInitialLine() {
 		String request = 
-			"GET/HTTP/1.0\r\n" +
-			"User-Agent: HTTPTool/1.0\n\r\n" +
-			"<html>Hello World!\r\n</html>";
+			"POST/HTTP/1.0\n" +
+			"User-Agent: HTTPTool/1.0\n" +
+			"Content-Length: 26\n\r\n" +
+			"<html>Hello World!\n</html>";
 		
 		BufferedReader input = new BufferedReader(
 				new InputStreamReader(

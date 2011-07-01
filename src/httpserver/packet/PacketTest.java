@@ -30,9 +30,10 @@ public class PacketTest {
 	@Test
 	public void parsesRequest() {
 		String request = 
-				"GET / HTTP/1.0\r\n" +
-				"User-Agent: HTTPTool/1.0\n\r\n" +
-				"<html>Hello World!\r\n</html>";
+				"POST / HTTP/1.0\n" +
+				"User-Agent: HTTPTool/1.0\n" +
+				"Content-Length: 26\n\r\n" +
+				"<html>Hello World!\n</html>";
 		
 		BufferedReader input = new BufferedReader(
 				new InputStreamReader(
@@ -41,20 +42,22 @@ public class PacketTest {
 		Packet packet = new Packet(input);
 		
 		assertEquals( 
-				"GET / HTTP/1.0\n" +
-				"User-Agent: HTTPTool/1.0\n\n",
+				"POST / HTTP/1.0\n" +
+				"User-Agent: HTTPTool/1.0\n" +
+				"Content-Length: 26\n\n",
 				packet.getHeader().getText());
 		assertEquals( 
-				"<html>Hello World!\n</html>\n",
+				"<html>Hello World!\n</html>",
 				packet.getBody().getText());
 	}
 	
 	@Test
 	public void validatesValidPacket() {
 		String validRequest = 
-			"GET / HTTP/1.0\r\n" +
-			"User-Agent: HTTPTool/1.0\n\r\n" +
-			"<html>Hello World!\r\n</html>";
+			"POST / HTTP/1.0\n" +
+			"User-Agent: HTTPTool/1.0\n" +
+			"Content-Length: 26\n\r\n" +
+			"<html>Hello World!\n</html>";
 
 		BufferedReader input = new BufferedReader(
 				new InputStreamReader(
