@@ -15,8 +15,14 @@ public class Protocol {
     	Packet packet = new Packet(input);
     	
     	if (packet.isValid()) {
-    		statusCode = 200;
-    		reasonPhrase = "OK";
+    		if (packet.getHeader().getInitialLine().getPath().equals("/foobar")) {
+	    		statusCode = 404;
+	    		reasonPhrase = "Not Found";
+    		}
+    		else {
+    			statusCode = 200;
+    			reasonPhrase = "OK";
+    		}
     	}
     	else {
     		statusCode = 400;

@@ -28,7 +28,7 @@ public class Client {
 		String request;
 		String response;
 
-		request = "GET / HTTP/1.0\n\r\n";
+		request = "GET / HTTP/1.0";
 		System.out.println("Client: " + request);
 		out.println(request);
 		

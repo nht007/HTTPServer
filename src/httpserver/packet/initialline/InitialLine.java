@@ -15,4 +15,16 @@ public class InitialLine {
 	public boolean isValid() {
 		return valid;
 	}
+	
+	public String getMethod() {
+		return null;
+	}
+	
+	public String getPath() {
+		return null;
+	}
+
+	public String getVersion() {
+		return null;
+	}
 }
