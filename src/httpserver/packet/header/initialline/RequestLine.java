@@ -1,4 +1,4 @@
-package httpserver.packet.initialline;
+package httpserver.packet.header.initialline;
 
 public class RequestLine extends InitialLine {
 	private String method;
@@ -11,9 +11,9 @@ public class RequestLine extends InitialLine {
 		String[] splitText = text.split("\\s+", 3);
 		
 		try {
-			method = splitText[0];
-			path = splitText[1];
-			version = splitText[2];
+			this.method = splitText[0];
+			this.path = splitText[1];
+			this.version = splitText[2];
 		}
 		catch (ArrayIndexOutOfBoundsException e) {
 			return;
@@ -23,18 +23,18 @@ public class RequestLine extends InitialLine {
 			return;
 		}
 		
-		valid = true;
+		this.valid = true;
 	}
 	
 	public String getMethod() {
-		return method;
+		return this.method;
 	}
 	
 	public String getPath() {
-		return path;
+		return this.path;
 	}
 
 	public String getVersion() {
-		return version;
+		return this.version;
 	}
 }

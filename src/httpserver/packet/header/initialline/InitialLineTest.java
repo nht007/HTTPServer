@@ -1,4 +1,4 @@
-package httpserver.packet.initialline;
+package httpserver.packet.header.initialline;
 import static org.junit.Assert.*;
 
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package httpserver.packet;
+package httpserver.packet.body;
 
 import static org.junit.Assert.*;
 

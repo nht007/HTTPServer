@@ -1,4 +1,4 @@
-package httpserver.packet.initialline;
+package httpserver.packet.header.initialline;
 
 public class InitialLine {
 	protected String text;

@@ -1,4 +1,4 @@
-package httpserver.packet;
+package httpserver.packet.body;
 
 public class Body {
 	private String text;

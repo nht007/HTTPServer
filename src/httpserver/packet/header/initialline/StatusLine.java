@@ -1,17 +1,17 @@
-package httpserver.packet.initialline;
+package httpserver.packet.header.initialline;
 
 public class StatusLine extends InitialLine {
 	private String version;
 	private int statusCode;
 	private String reasonPhrase;
 	
-	public StatusLine(String newVersion, int newCode, String newReasonPhrase) {
-		super(newVersion + " " + newCode + " " + newReasonPhrase);
-		version = newVersion;
-		statusCode = newCode;
-		reasonPhrase = newReasonPhrase;
+	public StatusLine(String version, int code, String reasonPhrase) {
+		super(version + " " + code + " " + reasonPhrase);
+		this.version = version;
+		this.statusCode = code;
+		this.reasonPhrase = reasonPhrase;
 		
-		valid = true;
+		this.valid = true;
 	}
 
 	public String getVersion() {

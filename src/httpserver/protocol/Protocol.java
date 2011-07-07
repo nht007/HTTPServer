@@ -1,12 +1,10 @@
 package httpserver.protocol;
 
 import java.io.BufferedReader;
-
 import httpserver.packet.Packet;
-import httpserver.packet.initialline.StatusLine;
 
 
-public class Protocol {
+public class Protocol { 
 	private String version = "HTTP/1.0";
 	private int statusCode;
 	private String reasonPhrase;
@@ -14,8 +12,16 @@ public class Protocol {
     public String processInput(BufferedReader input) {
     	Packet packet = new Packet(input);
     	
-    	if (packet.isValid()) {
-    		if (packet.getHeader().getInitialLine().getPath().equals("/foobar")) {
+    	getStatusCode(packet);
+    	
+    	Packet response = new Packet(version, statusCode, reasonPhrase, null, "");
+    	
+    	return response.getText();
+    }
+
+	private void getStatusCode(Packet packet) {
+		if (packet.isValid()) {
+    		if (packet.getPath().equals("/foobar")) {
 	    		statusCode = 404;
 	    		reasonPhrase = "Not Found";
     		}
@@ -28,9 +34,5 @@ public class Protocol {
     		statusCode = 400;
     		reasonPhrase = "Bad Request";
     	}
-    	
-    	StatusLine response = new StatusLine(version, statusCode, reasonPhrase);
-    	
-    	return response.getText();
-    }
+	}
 }

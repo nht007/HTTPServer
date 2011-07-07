@@ -1,5 +1,8 @@
 package httpserver.packet;
 
+import httpserver.packet.body.Body;
+import httpserver.packet.header.Header;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -8,22 +11,29 @@ public class Packet {
 	private Body body;
 	private boolean valid = true;
 
+	// construct from stream
 	public Packet(BufferedReader input) {
-		header = parseHeader(input);
+		this.header = parseHeader(input);
 		
-		if (header == null) {
-			header = null;
-			body = null;
-			valid = false;
+		if (this.header == null) {
+			this.header = null;
+			this.body = null;
+			this.valid = false;
 			return;
 		}
 		
-		int contentLength = header.getContentLength();
+		int contentLength = this.header.getContentLength();
 		
 		if (contentLength > 0) {
-			body = parseBody(input, contentLength);
+			this.body = parseRequestBody(input, contentLength);
 		}
-
+	}
+	
+	// construct manually
+	public Packet(String version, int code, String reasonPhrase, String[] lines, String bodyText) {
+		this.header = new Header(version, code, reasonPhrase, lines);
+		this.body = new Body(bodyText);
+		this.valid = true;
 	}
 
 	private Header parseHeader(BufferedReader input) {
@@ -44,7 +54,7 @@ public class Packet {
 
 	}
 	
-	private Body parseBody(BufferedReader input, int contentLength) {
+	private Body parseRequestBody(BufferedReader input, int contentLength) {
 		char[] bodyString = new char[contentLength];
 		
 		try {
@@ -56,22 +66,31 @@ public class Packet {
 		
 		return null;
 	}
+
+	public boolean isValid() {
+		if (this.header == null) {
+			return false;
+		}
+		else if (!this.header.isValid()) {
+			return false;
+		}
+		return this.valid;
+	}
 	
 	public Header getHeader() {
-		return header;
+		return this.header;
 	}
 	
 	public Body getBody() {
-		return body;
+		return this.body;
 	}
 	
-	public boolean isValid() {
-		if (header == null) {
-			return false;
-		}
-		else if (!header.isValid()) {
-			return false;
-		}
-		return valid;
+	public String getPath() {
+		return this.header.getPath();
 	}
+	
+	public String getText() {
+		return this.header.getText() + this.body.getText();
+	}
+	
 }

@@ -26,7 +26,7 @@ public class ProtocolTest {
 						new ByteArrayInputStream(request.getBytes())));
 		
 		String response = protocol.processInput(input);
-		assertEquals("HTTP/1.0 200 OK", response);
+		assertEquals("HTTP/1.0 200 OK\n\r\n", response);
 	}
 	
 	@Test
@@ -40,7 +40,7 @@ public class ProtocolTest {
 						new ByteArrayInputStream(request.getBytes())));
 		
 		String response = protocol.processInput(input);
-		assertEquals("HTTP/1.0 200 OK", response);
+		assertEquals("HTTP/1.0 200 OK\n\r\n", response);
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class ProtocolTest {
 						new ByteArrayInputStream(request.getBytes())));
 		
 		String response = protocol.processInput(input);
-		assertEquals("HTTP/1.0 400 Bad Request", response);
+		assertEquals("HTTP/1.0 400 Bad Request\n\r\n", response);
 	}
 
 	@Test
@@ -72,6 +72,20 @@ public class ProtocolTest {
 						new ByteArrayInputStream(request.getBytes())));
 		
 		String response = protocol.processInput(input);
-		assertEquals("HTTP/1.0 400 Bad Request", response);
+		assertEquals("HTTP/1.0 400 Bad Request\n\r\n", response);
+	}
+	
+	@Test
+	public void retrievesFile() {
+		String request = 
+			"GET /test HTTP/1.0\n\r\n";
+
+		BufferedReader input = new BufferedReader(
+				new InputStreamReader(
+						new ByteArrayInputStream(request.getBytes())));
+		
+		String response = protocol.processInput(input);
+		assertEquals("HTTP/1.0 200 OK\n\r\n" +
+				"test", response);
 	}
 }
