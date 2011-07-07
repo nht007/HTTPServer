@@ -86,6 +86,6 @@ public class ProtocolTest {
 		
 		String response = protocol.processInput(input);
 		assertEquals("HTTP/1.0 200 OK\n\r\n" +
-				"test", response);
+				"test\ntest\n", response);
 	}
 }

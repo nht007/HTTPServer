@@ -10,7 +10,7 @@
   </class>  
   <class id="2" corner="BOTTOM_RIGHT" language="java" name="httpserver.packet.Packet" project="HTTPServer" 
     file="/HTTPServer/src/httpserver/packet/Packet.java" binary="false">    
-    <position x="599" y="148" width="-1" height="-1"/>    
+    <position x="608" y="129" width="-1" height="-1"/>    
     <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
