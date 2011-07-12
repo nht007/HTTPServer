@@ -36,4 +36,10 @@ public class RequestLineTest {
 		RequestLine invalidLine = new RequestLine("GET/HTTP/1.0");
 		assertFalse(invalidLine.isValid());
 	}
+	
+	@Test
+	public void validatesInvalidMethod() {
+		RequestLine invalidLine = new RequestLine("BLAH / HTTP/1.0");
+		assertFalse(invalidLine.isValid());
+	}
 }

@@ -101,4 +101,11 @@ public class PacketTest {
 		assertEquals(null, packet.getBody());
 	}
 	
+	@Test
+	public void constructsPacket() {
+		Packet packet = new Packet("HTTP/1.0", 200, "OK", null, "test\ntest\n");
+		
+		assertEquals("HTTP/1.0 200 OK\n\r\ntest\ntest\n", packet.getText());
+		
+	}
 }

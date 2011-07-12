@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import httpserver.packet.Packet;
-import httpserver.packet.header.Header;
 
 
 public class Protocol { 

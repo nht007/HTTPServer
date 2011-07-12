@@ -16,11 +16,11 @@ public class RequestLine extends InitialLine {
 			this.version = splitText[2];
 		}
 		catch (ArrayIndexOutOfBoundsException e) {
-			return;
+			return; // invalid
 		}
 		
-		if (splitText.length != 3) {
-			return;
+		if (splitText.length != 3 || !validMethod()) {
+			return; // invalid
 		}
 		
 		this.valid = true;
@@ -36,5 +36,15 @@ public class RequestLine extends InitialLine {
 
 	public String getVersion() {
 		return this.version;
+	}
+	
+	private boolean validMethod() {
+		String[] validMethods = {"GET", "POST"};
+		for (String method : validMethods) {
+			if (this.method.equals(method)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
