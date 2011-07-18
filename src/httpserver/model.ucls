@@ -1,13 +1,5 @@
 <class-diagram version="1.0.3" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
   associations="true" dependencies="true" nesting-relationships="true">  
-  <class id="1" corner="BOTTOM_RIGHT" language="java" name="httpserver.protocol.Protocol" project="HTTPServer" 
-    file="/HTTPServer/src/httpserver/protocol/Protocol.java" binary="false">    
-    <position x="215" y="76" width="-1" height="-1"/>    
-    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
-    </display>  
-  </class>  
   <class id="2" corner="BOTTOM_RIGHT" language="java" name="httpserver.packet.Packet" project="HTTPServer" 
     file="/HTTPServer/src/httpserver/packet/Packet.java" binary="false">    
     <position x="608" y="129" width="-1" height="-1"/>    
@@ -35,14 +27,6 @@
   <class id="5" corner="BOTTOM_RIGHT" language="java" name="httpserver.MultiServer" project="HTTPServer" 
     file="/HTTPServer/src/httpserver/MultiServer.java" binary="false">    
     <position x="77" y="466" width="-1" height="-1"/>    
-    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
-    </display>  
-  </class>  
-  <class id="6" corner="BOTTOM_RIGHT" language="java" name="httpserver.MultiServerThread" project="HTTPServer" 
-    file="/HTTPServer/src/httpserver/MultiServerThread.java" binary="false">    
-    <position x="243" y="299" width="-1" height="-1"/>    
     <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
@@ -82,7 +66,23 @@
   </interface>  
   <class id="11" corner="BOTTOM_RIGHT" language="java" name="httpserver.protocol.filehandler.FileHandlerImpl" 
     project="HTTPServer" file="/HTTPServer/src/httpserver/protocol/filehandler/FileHandlerImpl.java" binary="false">    
-    <position x="17" y="247" width="110" height="76"/>    
+    <position x="82" y="60" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="12" corner="BOTTOM_RIGHT" language="java" name="httpserver.MultiServerThread" project="HTTPServer" 
+    file="/HTTPServer/src/httpserver/MultiServerThread.java" binary="false">    
+    <position x="165" y="263" width="116" height="92"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="13" corner="BOTTOM_RIGHT" language="java" name="httpserver.protocol.Protocol" project="HTTPServer" 
+    file="/HTTPServer/src/httpserver/protocol/Protocol.java" binary="false">    
+    <position x="199" y="82" width="147" height="92"/>    
     <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
@@ -92,42 +92,6 @@
     <end type="SOURCE" nodeId="3"/>    
     <end type="TARGET" nodeId="8"/>  
   </dependency>  
-  <association>    
-    <end type="SOURCE" nodeId="1" navigable="false">      
-      <attribute name="fileHandler"/>      
-      <multiplicity minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" nodeId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency>    
-    <end type="SOURCE" nodeId="5"/>    
-    <end type="TARGET" nodeId="6"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="1"/>    
-    <end type="TARGET" nodeId="2"/>  
-  </dependency>  
-  <generalization>    
-    <end type="SOURCE" nodeId="8"/>    
-    <end type="TARGET" nodeId="7"/>  
-  </generalization>  
-  <dependency>    
-    <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="1"/>  
-  </dependency>  
-  <association>    
-    <end type="SOURCE" nodeId="2" navigable="false">      
-      <attribute name="header"/>      
-      <multiplicity minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" nodeId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency>    
-    <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="10"/>  
-  </dependency>  
   <dependency>    
     <end type="SOURCE" nodeId="3"/>    
     <end type="TARGET" nodeId="9"/>  
@@ -136,14 +100,14 @@
     <end type="SOURCE" nodeId="11"/>    
     <end type="TARGET" nodeId="10"/>  
   </realization>  
-  <association>    
-    <end type="SOURCE" nodeId="2" navigable="false">      
-      <attribute name="body"/>      
-      <multiplicity minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" nodeId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <dependency>    
+    <end type="SOURCE" nodeId="5"/>    
+    <end type="TARGET" nodeId="12"/>  
+  </dependency>  
+  <generalization>    
+    <end type="SOURCE" nodeId="8"/>    
+    <end type="TARGET" nodeId="7"/>  
+  </generalization>  
   <association>    
     <end type="SOURCE" nodeId="3" navigable="false">      
       <attribute name="initialLine"/>      
@@ -152,13 +116,37 @@
     <end type="TARGET" nodeId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association>    
+    <end type="SOURCE" nodeId="2" navigable="false">      
+      <attribute name="body"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <generalization>    
     <end type="SOURCE" nodeId="9"/>    
     <end type="TARGET" nodeId="7"/>  
   </generalization>  
+  <association>    
+    <end type="SOURCE" nodeId="2" navigable="false">      
+      <attribute name="header"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="13" navigable="false">      
+      <attribute name="fileHandler"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <dependency>    
-    <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="11"/>  
+    <end type="SOURCE" nodeId="13"/>    
+    <end type="TARGET" nodeId="2"/>  
   </dependency>  
   <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true"/>    

@@ -8,6 +8,7 @@ import org.junit.*;
 
 public class FileHandlerImplTest {
 	private static FileHandler fileHandler;
+	
 	@BeforeClass
 	public static void constructFileHandler() {
 		fileHandler = new FileHandlerImpl();
