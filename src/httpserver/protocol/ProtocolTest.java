@@ -22,16 +22,12 @@ public class ProtocolTest {
 	private static Mockery context = new JUnit4Mockery();
 
 	@BeforeClass
-	public static void constructProtocol() {
+	public static void constructProtocol() throws FileNotFoundException {
 		fileHandler = context.mock(FileHandler.class);
-		try {
-			context.checking(new Expectations() {{
-				allowing(fileHandler).retrieveFile("/");
-				will(returnValue(""));
-			}});
-		} catch (FileNotFoundException e) {
-
-		}
+		context.checking(new Expectations() {{
+			allowing(fileHandler).retrieveFile("/");
+			will(returnValue(""));
+		}});
 		protocol = new Protocol(fileHandler);
 	}
 
@@ -95,7 +91,7 @@ public class ProtocolTest {
 	}
 	
 	@Test
-	public void retrievesFile() {
+	public void retrievesFile() throws FileNotFoundException {
 		String request = 
 			"GET /test HTTP/1.0\n\r\n";
 
@@ -103,17 +99,31 @@ public class ProtocolTest {
 				new InputStreamReader(
 						new ByteArrayInputStream(request.getBytes())));
 		
-		try {
-			context.checking(new Expectations() {{
-				allowing(fileHandler).retrieveFile("/test");
-				will(returnValue("test\ntest\n"));
-			}});
-		} catch (FileNotFoundException e) {
-
-		}
+		context.checking(new Expectations() {{
+			allowing(fileHandler).retrieveFile("/test");
+			will(returnValue("test\ntest\n"));
+		}});
 		
 		String response = protocol.processInput(input);
 		assertEquals("HTTP/1.0 200 OK\n\r\n" +
 				"test\ntest\n", response);
+	}
+	
+	@Test
+	public void returnsFileNotFound() throws FileNotFoundException {
+		String request = 
+			"GET /fdngkjdfg HTTP/1.0\n\r\n";
+
+		BufferedReader input = new BufferedReader(
+				new InputStreamReader(
+						new ByteArrayInputStream(request.getBytes())));
+		
+		context.checking(new Expectations() {{
+			allowing(fileHandler).retrieveFile("/fdngkjdfg");
+			will(throwException(new FileNotFoundException()));
+		}});
+		
+		String response = protocol.processInput(input);
+		assertEquals("HTTP/1.0 404 Not Found\n\r\n", response);
 	}
 }
