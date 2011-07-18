@@ -1,22 +1,37 @@
 package httpserver.protocol;
 
 import static org.junit.Assert.*;
+import org.jmock.Mockery;
+import org.jmock.Expectations;
+import org.jmock.integration.junit4.JMock;
+import org.jmock.integration.junit4.JUnit4Mockery;
 
 import httpserver.protocol.filehandler.FileHandler;
-
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 
 import org.junit.*;
+import org.junit.runner.RunWith;
 
+@RunWith(JMock.class)
 public class ProtocolTest {
 	private static Protocol protocol;
 	private static FileHandler fileHandler;
+	private static Mockery context = new JUnit4Mockery();
 
 	@BeforeClass
 	public static void constructProtocol() {
-		fileHandler = new FileHandler();
+		fileHandler = context.mock(FileHandler.class);
+		try {
+			context.checking(new Expectations() {{
+				allowing(fileHandler).retrieveFile("/");
+				will(returnValue(""));
+			}});
+		} catch (FileNotFoundException e) {
+
+		}
 		protocol = new Protocol(fileHandler);
 	}
 
@@ -87,6 +102,15 @@ public class ProtocolTest {
 		BufferedReader input = new BufferedReader(
 				new InputStreamReader(
 						new ByteArrayInputStream(request.getBytes())));
+		
+		try {
+			context.checking(new Expectations() {{
+				allowing(fileHandler).retrieveFile("/test");
+				will(returnValue("test\ntest\n"));
+			}});
+		} catch (FileNotFoundException e) {
+
+		}
 		
 		String response = protocol.processInput(input);
 		assertEquals("HTTP/1.0 200 OK\n\r\n" +

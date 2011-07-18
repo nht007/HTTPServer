@@ -6,11 +6,11 @@ import java.io.FileNotFoundException;
 
 import org.junit.*;
 
-public class FileHandlerTest {
+public class FileHandlerImplTest {
 	private static FileHandler fileHandler;
 	@BeforeClass
 	public static void constructFileHandler() {
-		fileHandler = new FileHandler();
+		fileHandler = new FileHandlerImpl();
 	}
 	
 	@Test
