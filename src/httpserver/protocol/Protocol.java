@@ -2,18 +2,25 @@ package httpserver.protocol;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 import httpserver.packet.Packet;
+import httpserver.protocol.filehandler.FileHandler;
 
 
-public class Protocol { 
+public class Protocol {
+	private FileHandler fileHandler;
 	
-    public String processInput(BufferedReader input) {
+    public Protocol(FileHandler fileHandler) {
+    	this.fileHandler = fileHandler;
+	}
+
+	public String processInput(BufferedReader input) {
     	Packet packet = new Packet(input);
     	
-    	Packet response = processPacket(packet); 
+    	Packet response = processPacket(packet);
+    	
+    	if (packet.isValid()) {
+    		System.err.println(packet.getText());
+    	}
     	
     	return response.getText();
     }
@@ -29,7 +36,7 @@ public class Protocol {
 			reasonPhrase = "OK";
 			
 			try {
-				body = retrieveFile(packet);
+				body = fileHandler.retrieveFile(packet.getPath());
 			} catch (FileNotFoundException e) {
 	    		statusCode = 404;
 	    		reasonPhrase = "Not Found";
@@ -41,27 +48,5 @@ public class Protocol {
     	}
 		
 		return new Packet(version, statusCode, reasonPhrase, null, body);
-	}
-
-	private String retrieveFile(Packet packet) throws FileNotFoundException {
-		String path = packet.getPath();
-		if (path.equals("/")) return "";
-		
-		BufferedReader file = new BufferedReader(
-				new FileReader("public" + path));
-		
-		String body = "";
-		try {
-			String readLine;
-			while ((readLine = file.readLine()) != null) {
-				body += readLine + "\n";
-			}
-			
-			file.close();
-		} catch (IOException e) {
-			
-		}
-		
-		return body;
 	}
 }

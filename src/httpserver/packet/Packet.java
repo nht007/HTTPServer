@@ -90,7 +90,12 @@ public class Packet {
 	}
 	
 	public String getText() {
-		return this.header.getText() + this.body.getText();
+		if (this.body != null) {
+			return this.header.getText() + this.body.getText();	
+		}
+		else {
+			return this.header.getText();
+		}
 	}
 	
 }

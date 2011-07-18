@@ -2,6 +2,8 @@ package httpserver.protocol;
 
 import static org.junit.Assert.*;
 
+import httpserver.protocol.filehandler.FileHandler;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
@@ -10,10 +12,12 @@ import org.junit.*;
 
 public class ProtocolTest {
 	private static Protocol protocol;
+	private static FileHandler fileHandler;
 
 	@BeforeClass
 	public static void constructProtocol() {
-		protocol = new Protocol();
+		fileHandler = new FileHandler();
+		protocol = new Protocol(fileHandler);
 	}
 
 	@Test

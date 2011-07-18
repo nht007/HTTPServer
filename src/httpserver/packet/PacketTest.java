@@ -106,6 +106,41 @@ public class PacketTest {
 		Packet packet = new Packet("HTTP/1.0", 200, "OK", null, "test\ntest\n");
 		
 		assertEquals("HTTP/1.0 200 OK\n\r\ntest\ntest\n", packet.getText());
+	}
+	
+	@Test
+	public void getTextWithBody() {
+		String request = 
+			"POST / HTTP/1.0\n" +
+			"User-Agent: HTTPTool/1.0\n" +
+			"Content-Length: 26\n\r\n" +
+			"<html>Hello World!\n</html>";
+
+		BufferedReader input = new BufferedReader(
+				new InputStreamReader(
+						new ByteArrayInputStream(request.getBytes())));
 		
+		Packet packet = new Packet(input);
+
+		assertEquals("POST / HTTP/1.0\n" +
+				"User-Agent: HTTPTool/1.0\n" +
+				"Content-Length: 26\n\n" +
+				"<html>Hello World!\n</html>", packet.getText());
+	}
+	
+	@Test
+	public void getTextWithoutBody() {
+		String request = 
+			"POST / HTTP/1.0\n" +
+			"User-Agent: HTTPTool/1.0\n\r\n";
+
+		BufferedReader input = new BufferedReader(
+				new InputStreamReader(
+						new ByteArrayInputStream(request.getBytes())));
+		
+		Packet packet = new Packet(input);
+
+		assertEquals("POST / HTTP/1.0\n" +
+				"User-Agent: HTTPTool/1.0\n\n", packet.getText());
 	}
 }

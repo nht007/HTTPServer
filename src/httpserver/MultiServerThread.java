@@ -1,5 +1,6 @@
 package httpserver;
 import httpserver.protocol.Protocol;
+import httpserver.protocol.filehandler.FileHandler;
 
 import java.net.*;
 import java.io.*;
@@ -20,7 +21,8 @@ public class MultiServerThread extends Thread {
 					new InputStreamReader(
 							socket.getInputStream()));
 
-			Protocol protocol = new Protocol();
+			FileHandler fileHandler = new FileHandler();
+			Protocol protocol = new Protocol(fileHandler);
 			String response = protocol.processInput(input);
 			
 			output.println(response);
