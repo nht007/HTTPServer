@@ -1,7 +1,6 @@
 package httpserver.packet.header;
 import httpserver.packet.header.initialline.InitialLine;
-import httpserver.packet.header.initialline.RequestLine;
-import httpserver.packet.header.initialline.StatusLine;
+import httpserver.packet.header.initialline.InitialLineFactory;
 
 
 public class Header {
@@ -13,13 +12,13 @@ public class Header {
 	public Header(String text) {
 		this.text = text;
 		this.lines = text.split("[\r|\n]+");
-		this.initialLine = new RequestLine(lines[0]);
+		this.initialLine = InitialLineFactory.createInitialLine(lines[0]);
 		
 		this.valid = initialLine.isValid();
 	}
 	
 	public Header(String version, int code, String reasonPhrase, String[] lines) {
-		this.initialLine = new StatusLine(version, code, reasonPhrase);
+		this.initialLine = InitialLineFactory.createInitialLine(version, code, reasonPhrase);
 		this.lines = lines;
 		this.text = constructResponseText();
 			

@@ -1,6 +1,6 @@
 package httpserver.packet.header.initialline;
 
-public class InitialLine {
+public abstract class InitialLine {
 	protected String text;
 	protected boolean valid = false;
 	
